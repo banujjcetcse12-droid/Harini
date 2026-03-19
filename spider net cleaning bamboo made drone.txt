@@ -1,0 +1,65 @@
+import java.util.Random;
+
+class Drone {
+    private boolean brushStatus = false;
+
+ 
+    public void fly() {
+        System.out.println("Drone is flying...");
+    }
+
+   
+    public boolean detectSpiderWeb() {
+        Random rand = new Random();
+        return rand.nextBoolean(); 
+    }
+
+ 
+    public void cleanWeb() {
+        brushStatus = true;
+        System.out.println("Spider web detected!");
+        System.out.println("Brush activated... Cleaning in progress...");
+        
+        try {
+            Thread.sleep(2000); 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        brushStatus = false;
+        System.out.println("Cleaning completed. Brush stopped.");
+    }
+
+    // Method to patrol area
+    public void patrol() {
+        System.out.println("Drone is scanning area...");
+    }
+}
+
+public class SpiderNetCleaningDrone {
+    public static void main(String[] args) {
+
+        Drone drone = new Drone();
+
+        for (int i = 0; i < 5; i++) {
+            drone.fly();
+            drone.patrol();
+
+            if (drone.detectSpiderWeb()) {
+                drone.cleanWeb();
+            } else {
+                System.out.println("No spider web detected.");
+            }
+
+            System.out.println("-----------------------------");
+
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("Mission Completed.");
+    }
+}
