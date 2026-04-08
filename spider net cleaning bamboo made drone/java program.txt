@@ -1,0 +1,54 @@
+class CleaningDrone {
+
+    String droneName;
+    int batteryLevel;
+
+ 
+    CleaningDrone(String name) {
+        this.droneName = name;
+        this.batteryLevel = 100;
+    }
+
+
+    void move(String direction) {
+        System.out.println(droneName + " moving " + direction);
+        batteryLevel -= 5;
+    }
+
+    void detectWeb(boolean found) {
+        if (found) {
+            System.out.println("Spider web detected!");
+        } else {
+            System.out.println("No spider web found.");
+        }
+    }
+
+    void cleanWeb() {
+        if (batteryLevel > 10) {
+            System.out.println("Cleaning spider web...");
+            batteryLevel -= 10;
+        } else {
+            System.out.println("Low battery! Cannot clean.");
+        }
+    }
+
+    void batteryStatus() {
+        System.out.println("Battery Level: " + batteryLevel + "%");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        CleaningDrone drone = new CleaningDrone("BambooCleanerDrone");
+
+        drone.move("up");
+        drone.detectWeb(true);
+        drone.cleanWeb();
+
+        drone.move("left");
+        drone.detectWeb(false);
+
+        drone.batteryStatus();
+    }
+}
